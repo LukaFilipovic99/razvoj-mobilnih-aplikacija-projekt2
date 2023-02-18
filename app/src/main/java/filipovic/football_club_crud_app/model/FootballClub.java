@@ -5,6 +5,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity(tableName = "football_club")
 public class FootballClub {
@@ -24,8 +25,17 @@ public class FootballClub {
     private League league;
 
     @NonNull
-    private LocalDate founded;
+    private Date founded;
 
+    private String logoUrl;
+
+    public String getLogoUrl() {
+        return logoUrl;
+    }
+
+    public void setLogoUrl(String logoUrl) {
+        this.logoUrl = logoUrl;
+    }
 
     @NonNull
     public Long getId() {
@@ -71,11 +81,11 @@ public class FootballClub {
     }
 
     @NonNull
-    public LocalDate getFounded() {
+    public Date getFounded() {
         return founded;
     }
 
-    public void setFounded(@NonNull LocalDate founded) {
+    public void setFounded(@NonNull Date founded) {
         this.founded = founded;
     }
 }
