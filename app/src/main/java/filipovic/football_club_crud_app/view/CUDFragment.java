@@ -117,12 +117,19 @@ public class CUDFragment extends Fragment implements AdapterView.OnItemSelectedL
 
     private void createMode() {
         btnDelete.setVisibility(View.GONE);
+
+        footballClubViewModel.getFootballClub().setFounded(new Date());
+        tvDate.setText(new SimpleDateFormat("dd.MM.yyyy")
+                .format(footballClubViewModel.getFootballClub().getFounded()));
+
         btnSave.setOnClickListener(view -> updateOrSaveFootballClub());
     }
 
 
     private void updateMode() {
-        btnTakePicture.setText(R.string.btn_change_image);
+        if (Objects.nonNull(footballClubViewModel.getFootballClub().getLogoUrl())) {
+            btnTakePicture.setText(R.string.btn_change_image);
+        }
 
         FootballClub club = footballClubViewModel.getFootballClub();
 
