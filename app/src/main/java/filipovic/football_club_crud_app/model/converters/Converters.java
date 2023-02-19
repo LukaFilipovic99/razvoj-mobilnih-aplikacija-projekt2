@@ -2,7 +2,6 @@ package filipovic.football_club_crud_app.model.converters;
 
 import androidx.room.TypeConverter;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 

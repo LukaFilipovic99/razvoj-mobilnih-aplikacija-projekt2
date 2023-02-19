@@ -210,7 +210,6 @@ public class CUDFragment extends Fragment implements AdapterView.OnItemSelectedL
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
-
         switch (position) {
             case 0:
                 footballClubViewModel.getFootballClub().setLeague(League.FA_PREMIER_LEAGUE);

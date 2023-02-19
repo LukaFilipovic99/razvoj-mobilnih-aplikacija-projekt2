@@ -5,17 +5,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,7 +15,6 @@ import butterknife.OnClick;
 import butterknife.OnItemClick;
 import filipovic.football_club_crud_app.R;
 import filipovic.football_club_crud_app.model.FootballClub;
-import filipovic.football_club_crud_app.model.League;
 import filipovic.football_club_crud_app.view.adapter.FootballClubAdapter;
 import filipovic.football_club_crud_app.view_model.FootballClubViewModel;
 

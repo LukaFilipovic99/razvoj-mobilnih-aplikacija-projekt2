@@ -17,7 +17,7 @@ public class FootballClubAdapter extends BaseAdapter {
 
     private List<FootballClub> footballClubs;
 
-    public FootballClubAdapter(){
+    public FootballClubAdapter() {
         footballClubs = new ArrayList<>();
     }
 
