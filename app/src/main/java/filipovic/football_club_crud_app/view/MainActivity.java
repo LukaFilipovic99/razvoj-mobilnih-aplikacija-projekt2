@@ -1,13 +1,12 @@
 package filipovic.football_club_crud_app.view;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
-
-import android.os.Bundle;
-import android.widget.ListView;
 
 import filipovic.football_club_crud_app.R;
 import filipovic.football_club_crud_app.view_model.FootballClubViewModel;
@@ -36,8 +35,11 @@ public class MainActivity extends AppCompatActivity {
         setFragment(new ReadFragment());
     }
 
-    public void cud() {
-        setFragment(new CUDFragment());
+    public void cud(boolean updateMode) {
+        CUDFragment cudFragment = new CUDFragment();
+        cudFragment.setUpdateMode(updateMode);
+
+        setFragment(cudFragment);
     }
 
     public FootballClubViewModel getFootballClubViewModel() {

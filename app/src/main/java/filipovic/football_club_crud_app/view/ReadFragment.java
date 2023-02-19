@@ -65,13 +65,13 @@ public class ReadFragment extends Fragment {
     public void onItemClick(int position) {
         footballClubViewModel.setFootballClub(adapter.getFootballClubs().get(position));
 
-        ((MainActivity) getActivity()).cud();
+        ((MainActivity) getActivity()).cud(true);
     }
 
     @OnClick(R.id.btnCreate)
     public void createFootballClub() {
         footballClubViewModel.setFootballClub(new FootballClub());
-        ((MainActivity) getActivity()).cud();
+        ((MainActivity) getActivity()).cud(false);
     }
 
 }

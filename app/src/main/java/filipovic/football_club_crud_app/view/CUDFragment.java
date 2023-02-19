@@ -13,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -39,6 +38,12 @@ import filipovic.football_club_crud_app.view_model.FootballClubViewModel;
 public class CUDFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
     private static final int GALLERY_REQUEST_CODE = 1000;
+
+    public void setUpdateMode(Boolean updateMode) {
+        this.updateMode = updateMode;
+    }
+
+    private Boolean updateMode;
 
     @BindView(R.id.etName)
     EditText etName;
@@ -68,7 +73,7 @@ public class CUDFragment extends Fragment implements AdapterView.OnItemSelectedL
     Button btnTakePicture;
 
     @BindView(R.id.btnSave)
-    Button btnUpdate;
+    Button btnSave;
 
     @BindView(R.id.btnBack)
     Button btnBack;
@@ -86,11 +91,11 @@ public class CUDFragment extends Fragment implements AdapterView.OnItemSelectedL
         ButterKnife.bind(this, view);
         initComponents();
 
-        if (footballClubViewModel.getFootballClub().getId() != 0) {
+        if (Objects.nonNull(updateMode) && updateMode == Boolean.TRUE) {
             updateMode();
+        } else {
+            createMode();
         }
-
-        createMode();
 
         return view;
     }
@@ -112,12 +117,7 @@ public class CUDFragment extends Fragment implements AdapterView.OnItemSelectedL
 
     private void createMode() {
         btnDelete.setVisibility(View.GONE);
-        btnUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                updateOrSaveFootballClub();
-            }
-        });
+        btnSave.setOnClickListener(view -> updateOrSaveFootballClub());
     }
 
 
@@ -133,6 +133,8 @@ public class CUDFragment extends Fragment implements AdapterView.OnItemSelectedL
         if (Objects.nonNull(club.getLogoUrl())) {
             Picasso.get().load(club.getLogoUrl()).fit().into(ivLogo);
         }
+
+        btnSave.setOnClickListener(view -> updateOrSaveFootballClub());
     }
 
     @OnClick(R.id.btnSave)
@@ -141,7 +143,7 @@ public class CUDFragment extends Fragment implements AdapterView.OnItemSelectedL
         footballClubViewModel.getFootballClub().setCoach(etCoach.getText().toString());
         footballClubViewModel.getFootballClub().setStadium(etStadium.getText().toString());
 
-        if (footballClubViewModel.getFootballClub().getId() != 0) {
+        if (Objects.nonNull(updateMode) && updateMode == Boolean.TRUE) {
             footballClubViewModel.update();
         } else {
             footballClubViewModel.create();
