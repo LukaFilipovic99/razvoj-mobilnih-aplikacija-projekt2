@@ -125,7 +125,7 @@
 
 
         <Button
-            android:id="@+id/btnTakePicture"
+            android:id="@+id/btnPicture"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Promijeni sliku" />

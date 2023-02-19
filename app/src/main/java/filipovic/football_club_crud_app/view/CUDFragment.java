@@ -1,19 +1,24 @@
 package filipovic.football_club_crud_app.view;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.squareup.picasso.Picasso;
@@ -32,6 +37,8 @@ import filipovic.football_club_crud_app.model.League;
 import filipovic.football_club_crud_app.view_model.FootballClubViewModel;
 
 public class CUDFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+
+    private static final int GALLERY_REQUEST_CODE = 1000;
 
     @BindView(R.id.etName)
     EditText etName;
@@ -57,7 +64,7 @@ public class CUDFragment extends Fragment implements AdapterView.OnItemSelectedL
     @BindView(R.id.btnChangeDate)
     Button btnChangeDate;
 
-    @BindView(R.id.btnTakePicture)
+    @BindView(R.id.btnPicture)
     Button btnTakePicture;
 
     @BindView(R.id.btnSave)
@@ -81,9 +88,9 @@ public class CUDFragment extends Fragment implements AdapterView.OnItemSelectedL
 
         if (footballClubViewModel.getFootballClub().getId() != 0) {
             updateMode();
-        } else {
-            createMode();
         }
+
+        createMode();
 
         return view;
     }
@@ -176,6 +183,27 @@ public class CUDFragment extends Fragment implements AdapterView.OnItemSelectedL
                 },
                 year, month, day);
         datePickerDialog.show();
+    }
+
+    @OnClick(R.id.btnPicture)
+    public void uploadPicture() {
+        Intent gallery = new Intent(Intent.ACTION_PICK);
+        gallery.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(gallery, GALLERY_REQUEST_CODE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            if (requestCode == GALLERY_REQUEST_CODE) {
+                footballClubViewModel.getFootballClub().setLogoUrl(data.getData().toString());
+                Picasso.get().load(footballClubViewModel.getFootballClub().getLogoUrl())
+                        .fit()
+                        .into(ivLogo);
+            }
+        }
     }
 
     @Override
