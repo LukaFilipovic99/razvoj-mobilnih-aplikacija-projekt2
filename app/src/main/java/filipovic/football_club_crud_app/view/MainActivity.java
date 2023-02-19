@@ -25,16 +25,20 @@ public class MainActivity extends AppCompatActivity {
         read();
     }
 
-    private void setFragment(Fragment fragment){
-        FragmentManager fragmentManager =getSupportFragmentManager();
+    private void setFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container,fragment);
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
     }
 
-    public void read(){
-        setFragment( new ReadFragment());
-    };
+    public void read() {
+        setFragment(new ReadFragment());
+    }
+
+    public void cud() {
+        setFragment(new CUDFragment());
+    }
 
     public FootballClubViewModel getFootballClubViewModel() {
         return footballClubViewModel;
