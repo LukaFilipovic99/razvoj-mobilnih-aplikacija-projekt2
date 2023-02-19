@@ -16,8 +16,6 @@ public class FootballClubViewModel extends AndroidViewModel {
 
     private FootballClubDAO footballClubDAO;
     private FootballClub footballClub;
-    private LiveData<List<FootballClub>> footballClubs;
-
 
     public FootballClubViewModel(@NonNull Application application) {
         super(application);
