@@ -1,3 +1,15 @@
 <resources>
-    <string name="app_name">football_club_crud_app</string>
+    <string name="app_name">Nogometni klubovi</string>
+
+    <string name="lbl_league">Liga:</string>
+    <string name="lbl_coach">Trener:</string>
+    <string name="lbl_stadium">Stadion:</string>
+    <string name="lbl_date">Datum osnivanja:</string>
+
+    <string name="btn_save">Spremi</string>
+    <string name="btn_delete">Izbriši</string>
+    <string name="btn_date">Odaberi datum</string>
+    <string name="btn_upload_image">Učitaj sliku</string>
+    <string name="btn_change_image">Promijeni sliku</string>
+    <string name="btn_back">Natrag</string>
 </resources>

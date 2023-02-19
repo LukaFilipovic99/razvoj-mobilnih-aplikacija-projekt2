@@ -8,22 +8,21 @@
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
         android:layout_marginLeft="5dp"
-        android:maxWidth="220dp"/>
+        android:maxWidth="220dp"
+        android:textSize="30sp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="5dp">
+        android:layout_marginRight="5dp"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Liga:"
-            />
+            android:text="@string/lbl_league" />
 
         <TextView
             android:id="@+id/tvLeague"

@@ -1,7 +1,6 @@
 package filipovic.football_club_crud_app.view;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +45,6 @@ public class ReadFragment extends Fragment {
 
     private void readData() {
         footballClubViewModel.getAll().observe(getViewLifecycleOwner(), clubs -> {
-            Log.d("jdksaldakdlde", String.valueOf(clubs.size()));
             adapter.setFootballClubs(clubs);
             adapter.notifyDataSetChanged();
         });

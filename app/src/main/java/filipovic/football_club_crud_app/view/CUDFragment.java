@@ -122,6 +122,8 @@ public class CUDFragment extends Fragment implements AdapterView.OnItemSelectedL
 
 
     private void updateMode() {
+        btnTakePicture.setText(R.string.btn_change_image);
+
         FootballClub club = footballClubViewModel.getFootballClub();
 
         etName.setText(club.getName());

@@ -54,7 +54,7 @@
                         android:id="@+id/lblLeague"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Liga: " />
+                        android:text="@string/lbl_league" />
 
                     <Spinner
                         android:id="@+id/spinnerLeague"
@@ -69,7 +69,7 @@
                     android:id="@+id/tvLeague"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="15sp" />
+                    android:textSize="20sp" />
 
             </LinearLayout>
 
@@ -79,7 +79,7 @@
             android:id="@+id/lblCoach"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Trener: " />
+            android:text="@string/lbl_coach" />
 
         <EditText
             android:id="@+id/etCoach"
@@ -91,7 +91,8 @@
             android:id="@+id/lblStadium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Stadion: " />
+            android:text="@string/lbl_stadium"
+            />
 
         <EditText
             android:id="@+id/etStadium"
@@ -103,7 +104,7 @@
             android:id="@+id/lblFoundedDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Datum osnivanja: " />
+            android:text="@string/lbl_date" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -120,7 +121,7 @@
                 android:id="@+id/btnChangeDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Datum" />
+                android:text="@string/btn_date" />
 
         </LinearLayout>
 
@@ -129,13 +130,14 @@
             android:id="@+id/btnPicture"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="Promijeni sliku" />
+            android:layout_marginTop="30dp"
+            android:text="@string/btn_upload_image" />
 
         <Button
             android:id="@+id/btnDelete"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="Izbriši" />
+            android:text="@string/btn_delete" />
 
     </LinearLayout>
 
@@ -143,14 +145,14 @@
         android:id="@+id/btnSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Spremi"
+        android:text="@string/btn_save"
         app:layout_constraintBottom_toTopOf="@+id/btnBack" />
 
     <Button
         android:id="@+id/btnBack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Natrag"
+        android:text="@string/btn_back"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
