@@ -9,7 +9,9 @@
     <string name="btn_save">Spremi</string>
     <string name="btn_delete">Izbriši</string>
     <string name="btn_date">Odaberi datum</string>
-    <string name="btn_upload_image">Učitaj sliku</string>
+    <string name="btn_upload_image">Uslikaj sliku</string>
     <string name="btn_change_image">Promijeni sliku</string>
     <string name="btn_back">Natrag</string>
+
+    <string name="file_provider_authority">filipovic.mvvmroom.provider</string>
 </resources>

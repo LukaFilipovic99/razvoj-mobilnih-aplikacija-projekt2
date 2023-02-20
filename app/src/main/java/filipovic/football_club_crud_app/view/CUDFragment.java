@@ -1,10 +1,11 @@
 package filipovic.football_club_crud_app.view;
 
-import static android.app.Activity.RESULT_OK;
-
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,10 +19,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -37,7 +41,9 @@ import filipovic.football_club_crud_app.view_model.FootballClubViewModel;
 
 public class CUDFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
-    private static final int GALLERY_REQUEST_CODE = 1000;
+    private static final int TAKING_PICTURE = 1;
+
+    private static final String JPG_SUFFIX = ".jpg";
 
     public void setUpdateMode(Boolean updateMode) {
         this.updateMode = updateMode;
@@ -197,24 +203,42 @@ public class CUDFragment extends Fragment implements AdapterView.OnItemSelectedL
     }
 
     @OnClick(R.id.btnPicture)
-    public void uploadPicture() {
-        Intent gallery = new Intent(Intent.ACTION_PICK);
-        gallery.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(gallery, GALLERY_REQUEST_CODE);
+    public void takePicture() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (Objects.isNull(takePictureIntent.resolveActivity(getActivity().getPackageManager()))) {
+            return;
+        }
+
+        File picture = null;
+
+        try {
+            picture = createPictureFile();
+        } catch (Exception e) {
+            return;
+        }
+
+        if (Objects.isNull(picture)) {
+            return;
+        }
+
+        footballClubViewModel.getFootballClub().setLogoUrl("file:" + picture.getAbsolutePath());
+
+        Uri pictureUri = FileProvider.getUriForFile(getActivity(),
+                getString(R.string.file_provider_authority),
+                picture);
+        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, pictureUri);
+        startActivityForResult(takePictureIntent, TAKING_PICTURE);
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    private File createPictureFile() throws IOException {
+        String pictureName = footballClubViewModel.getFootballClub().getName() + "_logo" +
+                new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
 
-        if (resultCode == RESULT_OK) {
-            if (requestCode == GALLERY_REQUEST_CODE) {
-                footballClubViewModel.getFootballClub().setLogoUrl(data.getData().toString());
-                Picasso.get().load(footballClubViewModel.getFootballClub().getLogoUrl())
-                        .fit()
-                        .into(ivLogo);
-            }
-        }
+        File directory = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+
+        File pictureFile = File.createTempFile(pictureName, JPG_SUFFIX, directory);
+
+        return pictureFile;
     }
 
     @Override
@@ -247,6 +271,17 @@ public class CUDFragment extends Fragment implements AdapterView.OnItemSelectedL
     public void onNothingSelected(AdapterView<?> parent) {
         footballClubViewModel.getFootballClub().setLeague(null);
         tvLeague.setText(null);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == TAKING_PICTURE && resultCode == Activity.RESULT_OK) {
+            Picasso.get().load(footballClubViewModel.getFootballClub().getLogoUrl())
+                    .fit()
+                    .into(ivLogo);
+        }
     }
 }
 
